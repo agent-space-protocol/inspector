@@ -1,0 +1,32 @@
+name: check
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: inspector
+      - uses: actions/checkout@v4
+        with:
+          repository: agent-space-protocol/typescript-sdk
+          path: typescript-sdk
+          token: ${{ secrets.SDK_READ_TOKEN || github.token }}
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: inspector/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: pnpm install --frozen-lockfile && pnpm --filter @agent-space-protocol/sdk build
+        working-directory: typescript-sdk
+      - run: pnpm install --frozen-lockfile
+        working-directory: inspector
+      - run: pnpm exec tsc -p tsconfig.json --noEmit
+        working-directory: inspector
+      - name: The test space passes; each broken variant is caught by its own test only
+        run: node test/acceptance.ts
+        working-directory: inspector
