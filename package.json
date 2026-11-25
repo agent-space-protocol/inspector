@@ -1,0 +1,35 @@
+{
+  "name": "@agent-space-protocol/inspector",
+  "version": "0.0.0",
+  "description": "The agent-space command: conformance tests (check) and a terminal client (tui) for any Agent Space Protocol space",
+  "license": "Apache-2.0",
+  "type": "module",
+  "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agent-space-protocol/inspector.git"
+  },
+  "bin": {
+    "agent-space": "dist/src/cli.js"
+  },
+  "files": [
+    "dist",
+    "profiles"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "agent-space": "node src/cli.ts",
+    "test": "node --test --test-concurrency=1 test/*.test.ts",
+    "acceptance": "node test/acceptance.ts"
+  },
+  "dependencies": {
+    "@agent-space-protocol/sdk": "link:../typescript-sdk/packages/sdk"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "^5.9.3"
+  }
+}

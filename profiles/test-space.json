@@ -1,0 +1,56 @@
+{
+  "role": "member",
+  "owner": "owner",
+  "done": {
+    "verb": "test.toggle",
+    "object": "lamp:1"
+  },
+  "counter": {
+    "verb": "test.add",
+    "object": "counter:1",
+    "args": {
+      "n": 1
+    },
+    "property": "value"
+  },
+  "slow": {
+    "verb": "test.wait",
+    "args": {
+      "seconds": 30
+    }
+  },
+  "stale": {
+    "verb": "test.toggle",
+    "object": "lamp:1"
+  },
+  "constraint": {
+    "verb": "test.pack",
+    "object": "box:1",
+    "args": {
+      "balls": [
+        "ball:2",
+        "ball:3"
+      ]
+    }
+  },
+  "consent": {
+    "verb": "test.launch"
+  },
+  "offer": {
+    "thing": {
+      "id": "parcel:1",
+      "type": "test.parcel",
+      "parents": [
+        "test.ball",
+        "test.thing"
+      ]
+    },
+    "unknown": {
+      "id": "blob:1",
+      "type": "elsewhere.blob",
+      "parents": [
+        "elsewhere.thing"
+      ]
+    }
+  }
+}
